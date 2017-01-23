@@ -1,0 +1,103 @@
+---
+title: "R - Assignment 3"
+author: "Keino Chichester"
+date: "January 22, 2017"
+output: html_document
+---
+```{r}
+library(RCurl)
+library(ggplot2)
+library(reshape2)
+```
+```{r}
+require(ggplot2)
+require(RCurl)
+require(reshape2)
+```
+
+```{r}
+Titanic <- read.csv ("https://raw.github.com/vincentarelbundock/Rdatasets/master/csv/datasets/Titanic.csv")
+```
+
+```{r}
+Titanic <- data.frame(Titanic)
+View(Titanic)
+```
+
+```{r}
+attach(Titanic)
+```
+
+```{r}
+summary(Titanic)
+```
+
+```{r}
+Titanic_v2 <- subset(Titanic, select = c (X, PClass, Age, Sex, Survived))
+summary(Titanic_v2)
+```
+
+```{r}
+names(Titanic_v2)[names(Titanic_v2)=="X"] <- "ID"
+names(Titanic_v2)[names(Titanic_v2)=="PClass"] <- "Passenger Class"
+```
+
+```{r}
+summary(`Passenger Class`)
+```
+```{r}
+mean(`Passenger Class`, 
+```
+
+```{r}
+Titanic_v2$Survived[Titanic_v2$Survived == 1] <- "YES"
+Titanic_v2$Survived[Titanic_v2$Survived == 0] <- "NO"
+```
+
+```{r}
+attach(Titanic_v2)
+```
+
+```{r}
+summary(Age)
+```
+
+```{r}
+summary(`Passenger Class`)
+```
+```{r}
+#Graph passengers by Class
+plot(Titanic_v2$`Passenger Class`)
+```
+
+
+```{r}
+# Graph the Age of the passengers in relation to their sex
+q <- ggplot ( Titanic_v2, aes( x = Age, fill = Sex ) )
+q + geom_histogram( )
+
+```
+
+```{r}
+ggplot(Titanic_v2, aes(x = `Passenger Class`, y = Survived)) + geom_point(na.rm=TRUE)+geom_smooth(method=lm,se=FALSE, na.rm=TRUE)
+```
+
+```{r}
+#Use Box plot to graph passenger Age
+boxplot(Titanic_v2$Age)
+```
+
+```{r}
+write.csv(Titanic_v2, file="Titanic_v3.csv")
+```
+
+```{r}
+Titanic_v3.1 <- read.csv ("https://raw.githubusercontent.com/KeinoC/R---Week-3-Assignement-/master/Titanic_v3.csv")
+```
+ch
+```{r}
+head(Titanic_v3.1)
+```
+
+
+
